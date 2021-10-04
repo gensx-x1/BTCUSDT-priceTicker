@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 
 
-namespace HelloWorld
+namespace PriceTick
 {
     class Program
     {
