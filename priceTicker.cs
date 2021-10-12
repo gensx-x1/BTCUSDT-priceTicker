@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 
 
-namespace PriceTick
+namespace priceTick
 {
     class Program
     {
@@ -25,16 +25,19 @@ namespace PriceTick
         public class Price
         {
             public string symbol { get; set; }
-            public double price { get; set; }
+            public float price { get; set; }
         }
         static void Main(string[] args)
         {
             string url = "https://api1.binance.com/api/v3/ticker/price?symbol=BTCUSDT";
+            float lastPrice = 0;
             for (int i = 0; ;i++ )
             {
                 string site = Get(url);
                 Price price = JsonConvert.DeserializeObject<Price>(site);
-                Console.Write("\rCurrent price: " + price.price + "     ");
+                float priceChange = price.price - lastPrice;
+                lastPrice = price.price;
+                Console.WriteLine("\rCurrent price: " + price.price + "   priceChange: " + priceChange.ToString("0.00"));
                 System.Threading.Thread.Sleep(1000);
             }
 
